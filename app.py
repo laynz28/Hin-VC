@@ -1358,7 +1358,7 @@ def download_from_url(url, model):
                     shutil.copy(file_path,f'./weights/{model}.pth')
         shutil.rmtree("zips")
         shutil.rmtree("unzips")
-        return "Modello scaricato con successo, puoi tornare all'inferenza."
+        return "Model downloaded, you can go back to the inference page!"
     except:
         return "Errore, il modello non si è scaricato correttamente."
 def success_message(face):
