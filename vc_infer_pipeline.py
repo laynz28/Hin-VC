@@ -15,6 +15,14 @@ bh, ah = signal.butter(N=5, Wn=48, btype="high", fs=16000)
 
 input_audio_path2wav = {}
 
+#A fun little addition from my personal RVC branch.
+#You don't have to implement it if you don't have to
+from config import Config
+config=Config()
+from rmvpe import RMVPE
+print("Preloading RMVPE model...")
+model_rmvpe = RMVPE("rmvpe.pt", is_half=config.is_half, device=config.device)
+del config
 
 @lru_cache
 def cache_harvest_f0(input_audio_path, fs, f0max, f0min, frame_period):
@@ -312,14 +320,7 @@ class VC(object):
                 x, f0_min, f0_max, p_len, crepe_hop_length, "tiny"
             )
         elif f0_method == "rmvpe":
-            if hasattr(self, "model_rmvpe") == False:
-                from rmvpe import RMVPE
-
-                print("loading rmvpe model")
-                self.model_rmvpe = RMVPE(
-                    "rmvpe.pt", is_half=self.is_half, device=self.device
-                )
-            f0 = self.model_rmvpe.infer_from_audio(x, thred=0.03)
+            f0 = model_rmvpe.infer_from_audio(x, thred=0.03)
 
         elif "hybrid" in f0_method:
             # Perform hybrid median pitch estimation

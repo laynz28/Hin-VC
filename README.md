@@ -1,5 +1,5 @@
 ---
-title: Ilaria RVC 2.0
+title: Ilaria RVC
 emoji: 😻
 colorFrom: pink
 colorTo: pink

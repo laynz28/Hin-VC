@@ -21,6 +21,11 @@ warnings.filterwarnings("ignore")
 torch.manual_seed(114514)
 from i18n import I18nAuto
 
+import edge_tts, asyncio
+from ilariatts import tts_order_voice
+language_dict = tts_order_voice
+ilariavoices = language_dict.keys()
+
 import signal
 
 import math
@@ -1360,7 +1365,7 @@ def download_from_url(url, model):
         shutil.rmtree("unzips")
         return "Model downloaded, you can go back to the inference page!"
     except:
-        return "Errore, il modello non si è scaricato correttamente."
+        return "ERROR - The download failed. Check if the link is valid."
 def success_message(face):
     return f'{face.name} has been uploaded.', 'None'
 def mouth(size, face, voice, faces):
@@ -1445,6 +1450,12 @@ def elevenTTS(xiapi, text, id, lang):
         aud_path = save_to_wav('./temp_gTTS.mp3')
         return aud_path, aud_path
 
+def ilariaTTS(text, ttsvoice):
+    vo=language_dict[ttsvoice]
+    asyncio.run(edge_tts.Communicate(text, vo).save("./temp_ilaria.mp3"))
+    aud_path = save_to_wav('./temp_ilaria.mp3')
+    return aud_path, aud_path
+
 def upload_to_dataset(files, dir):
     if dir == '':
         dir = './dataset'
@@ -1470,12 +1481,12 @@ def zip_downloader(model):
     else:
         return f'./weights/{model}.pth', "Could not find Index file."
 
-with gr.Blocks(theme=gr.themes.Base (), title='Mangio-RVC-Web 💻') as app:
+with gr.Blocks(theme=gr.themes.Default(primary_hue="pink", secondary_hue="rose"), title="Ilaria RVC 💖") as app:
     with gr.Tabs():
         with gr.TabItem("Inference"):
-            gr.HTML("<h1>  Ilaria RVC 2.0 💖   </h1>")     
+            gr.HTML("<h1>  Ilaria RVC 💖   </h1>")     
             gr.HTML("<h10>   You can find voice models on AI Hub: https://discord.gg/aihub   </h10>")   
-            gr.HTML("<h4>  Huggingface port by Ilaria of the Rejekt Easy GUI  </h4>")
+            gr.HTML("<h4>  Huggingface port by Ilaria of the Rejekt Easy GUI </h4>")
 
             # Inference Preset Row
             # with gr.Row():
@@ -1525,11 +1536,11 @@ with gr.Blocks(theme=gr.themes.Base (), title='Mangio-RVC-Web 💻') as app:
                         dropbox.upload(fn=change_choices2, inputs=[], outputs=[input_audio0])
                         refresh_button2 = gr.Button("Refresh", variant="primary", size='sm')
                         record_button.change(fn=save_to_wav, inputs=[record_button], outputs=[input_audio0])
-                        record_button.change(fn=change_choices2, inputs=[], outputs=[input_audio0])
+                        record_button.change(fn=change_choices2, inputs=[], outputs=[input_audio0])    
                     with gr.Row():
-                        with gr.Accordion('Text To Speech', open=False):
+                        with gr.Accordion('ElevenLabs / Google TTS', open=False):
                             with gr.Column():
-                                lang = gr.Radio(label='Chinese & Japanese do not work with ElevenLabs currently.',choices=['en','es','fr','pt','zh-CN','de','hi','ja'], value='en')
+                                lang = gr.Radio(label='Chinese & Japanese do not work with ElevenLabs currently.',choices=['en','it','es','fr','pt','zh-CN','de','hi','ja'], value='en')
                                 api_box = gr.Textbox(label="Enter your API Key for ElevenLabs, or leave empty to use GoogleTTS", value='')
                                 elevenid=gr.Dropdown(label="Voice:", choices=eleven_voices)
                             with gr.Column():
@@ -1537,7 +1548,7 @@ with gr.Blocks(theme=gr.themes.Base (), title='Mangio-RVC-Web 💻') as app:
                                 tts_button = gr.Button(value="Speak")
                                 tts_button.click(fn=elevenTTS, inputs=[api_box,tfs, elevenid, lang], outputs=[record_button, input_audio0])
                     with gr.Row():
-                        with gr.Accordion('Wav2Lip', open=False):
+                        with gr.Accordion('Wav2Lip', open=False, visible=False):
                             with gr.Row():
                                 size = gr.Radio(label='Resolution:',choices=['Half','Full'])
                                 face = gr.UploadButton("Upload A Character",type='file')
@@ -1550,37 +1561,50 @@ with gr.Blocks(theme=gr.themes.Base (), title='Mangio-RVC-Web 💻') as app:
                                 refresh_button2.click(fn=change_choices2, inputs=[], outputs=[input_audio0, animation])
                             with gr.Row():
                                 animate_button = gr.Button('Animate')
-
+                        
                 with gr.Column():
-                    with gr.Accordion("Index Settings", open=False):
-                        file_index1 = gr.Dropdown(
-                            label="3. Choose the index file (in case it wasn't automatically found.)",
-                            choices=get_indexes(),
-                            value=get_index(),
-                            interactive=True,
-                            )
-                        sid0.change(fn=match_index, inputs=[sid0],outputs=[file_index1])
-                        refresh_button.click(
-                            fn=change_choices, inputs=[], outputs=[sid0, file_index1]
-                            )
-                        # file_big_npy1 = gr.Textbox(
-                        #     label=i18n("特征文件路径"),
-                        #     value="E:\\codes\py39\\vits_vc_gpu_train\\logs\\mi-test-1key\\total_fea.npy",
-                        #     interactive=True,
-                        # )
-                        index_rate1 = gr.Slider(
-                            minimum=0,
-                            maximum=1,
-                            label=i18n("检索特征占比"),
-                            value=0.66,
-                            interactive=True,
-                            )
                     vc_output2 = gr.Audio(
                         label="Final Result! (Click on the three dots to download the audio)",
                         type='filepath',
                         interactive=False,
                     )
+                    
+                    with gr.Accordion('IlariaTTS', open=True):
+                        with gr.Column():
+                            ilariaid=gr.Dropdown(label="Voice:", choices=ilariavoices, value="English-Jenny (Female)")
+                            ilariatext = gr.Textbox(label="Input your Text", interactive=True, value="This is a test.")
+                            ilariatts_button = gr.Button(value="Speak")
+                            ilariatts_button.click(fn=ilariaTTS, inputs=[ilariatext, ilariaid], outputs=[record_button, input_audio0])    
+
+                #with gr.Column():
+                    with gr.Accordion("Index Settings", open=False):
+                        #with gr.Row():
+                        
+                            file_index1 = gr.Dropdown(
+                                label="3. Choose the index file (in case it wasn't automatically found.)",
+                                choices=get_indexes(),
+                                value=get_index(),
+                                interactive=True,
+                                )
+                            sid0.change(fn=match_index, inputs=[sid0],outputs=[file_index1])
+                            refresh_button.click(
+                                fn=change_choices, inputs=[], outputs=[sid0, file_index1]
+                                )
+                            # file_big_npy1 = gr.Textbox(
+                            #     label=i18n("特征文件路径"),
+                            #     value="E:\\codes\py39\\vits_vc_gpu_train\\logs\\mi-test-1key\\total_fea.npy",
+                            #     interactive=True,
+                            # )
+                            index_rate1 = gr.Slider(
+                                minimum=0,
+                                maximum=1,
+                                label=i18n("检索特征占比"),
+                                value=0.66,
+                                interactive=True,
+                                )
+
                     animate_button.click(fn=mouth, inputs=[size, face, vc_output2, faces], outputs=[animation, preview])
+
                     with gr.Accordion("Advanced Options", open=False):
                         f0method0 = gr.Radio(
                             label="Optional: Change the Pitch Extraction Algorithm. Extraction methods are sorted from 'worst quality' to 'best quality'. If you don't know what you're doing, leave rmvpe.",
@@ -1679,6 +1703,7 @@ with gr.Blocks(theme=gr.themes.Base (), title='Mangio-RVC-Web 💻') as app:
                         formanting.change(fn=formant_enabled,inputs=[formanting,qfrency,tmbre,frmntbut,formant_preset,formant_refresh_button],outputs=[formanting,qfrency,tmbre,frmntbut,formant_preset,formant_refresh_button])
                         frmntbut.click(fn=formant_apply,inputs=[qfrency, tmbre], outputs=[qfrency, tmbre])
                         formant_refresh_button.click(fn=update_fshift_presets,inputs=[formant_preset, qfrency, tmbre],outputs=[formant_preset, qfrency, tmbre])
+            
             with gr.Row():
                 vc_output1 = gr.Textbox("")
                 f0_file = gr.File(label=i18n("F0曲线文件, 可选, 一行一个音高, 代替默认F0及升降调"), visible=False)
@@ -1704,7 +1729,7 @@ with gr.Blocks(theme=gr.themes.Base (), title='Mangio-RVC-Web 💻') as app:
                     [vc_output1, vc_output2],
                 )
                         
-            with gr.Accordion("Batch Conversion",open=False):
+            with gr.Accordion("Batch Conversion",open=False, visible=False):
                 with gr.Row():
                     with gr.Column():
                         vc_transform1 = gr.Number(
@@ -1828,7 +1853,7 @@ with gr.Blocks(theme=gr.themes.Base (), title='Mangio-RVC-Web 💻') as app:
                 model = gr.Textbox(label="Name of the model (without spaces):")
                 download_button=gr.Button("Download")
             with gr.Row():
-                status_bar=gr.Textbox(label="")
+                status_bar=gr.Textbox(label="Download Status")
                 download_button.click(fn=download_from_url, inputs=[url, model], outputs=[status_bar])
             with gr.Row():
                 gr.Markdown(
@@ -2080,9 +2105,9 @@ with gr.Blocks(theme=gr.themes.Base (), title='Mangio-RVC-Web 💻') as app:
         else:
             print(
                 "Pretrained weights not downloaded. Disabling training tab.\n"
-                "Wondering how to train a voice? Visit here for the RVC model training guide: https://t.ly/RVC_Training_Guide\n"
+                "Wondering how to train a voice? Join AI HUB Discord Server! https://discord.gg/aihub\n"
                 "-------------------------------\n"
             )
                 
-    app.queue(concurrency_count=511, max_size=1022).launch(share=False, quiet=True)
+    app.queue(concurrency_count=511, max_size=1022).launch(share=False, quiet=False)
 #endregion
