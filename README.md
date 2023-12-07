@@ -7,51 +7,64 @@ sdk: gradio
 sdk_version: 3.42.0
 app_file: app.py
 pinned: true
-license: lgpl-3.0
+license: openrail
 ---
 
-## 🔧 Pre-requisites
+***
+![Ilaria AI Suite](https://i.ibb.co/6yfRfS8/ilariasuitewallpaper.jpg)
+***
 
-Before running the project, you must have the following tool installed on your machine: 
-* [Python v3.8.0](https://www.python.org/downloads/release/python-380/)
+<p align="center">
+  <h1>Ilaria RVC 💖</h1>
+</p>
 
-Also, you will need to clone the repository:
+🎉 Welcome to Ilaria RVC! 🎉  
+  
+This project leverages various libraries and modules to create a Graphical User Interface (GUI) for voice conversion. It's primarily designed for use with HuggingFace Spaces. 🤗
 
-```bash
-# Clone the repository
-git clone https://huggingface.co/spaces/mateuseap/magic-vocals/
-# Enter in the root directory
-cd magic-vocals
-```
+## 📦 Installation 📦
 
-## 🚀 How to run
+To use this project, clone the original Space on Hugging Face.  
+Make sure you restart it time to time to keep up with the new updates.
 
-After you've cloned the repository and entered in the root directory, run the following commands:
+## 🖥️ Usage 🖥️
 
-```bash
-# Create and activate a Virtual Environment (make sure you're using Python v3.8.0 to do it)
-python -m venv venv
-. venv/bin/activate
+Once the dependencies are installed automatically, Hugging Face will use app.py to start the user interface.  
+From there, you can utilize the various features of the project.
 
-# Change mode and execute a shell script to configure and run the application
-chmod +x run.sh
-./run.sh
-```
+## 🌟 Features 🌟
 
-After the shell script executes everything, the application will be running at http://127.0.0.1:7860! Open up the link in a browser to use the app:
+Ilaria RVC offers a range of features, including:
 
-![Magic Vocals](https://i.imgur.com/V55oKv8.png)
+- 🎙️ **Convert audio with a desired voice model**:  
+With Ilaria RVC, you can transform any audio using the voice model you prefer. It’s like having a personal voice-over artist at your fingertips.
 
-**You only need to execute the `run.sh` one time**, once you've executed it one time, you just need to activate the virtual environment and run the command below to start the app again:
+- 💾 **Download a voice model directly from the interface**:  
+You can directly download models with the download without using any other interface, How convenient is that?
 
-```bash
-python app.py
-```
+- 🚀 **Advanced and cutting-edge options for conversion**:  
+Ilaria RVC offers conversion options that are at the forefront of AI. You can tailor your experience to your specific needs.
 
-**THE `run.sh` IS SUPPORTED BY THE FOLLOWING OPERATING SYSTEMS:**
+- 🛠️ **Constantly updated by Ilaria and AI Hub engineers**:  
+Ilaria RVC is a product in constant evolution. Ilaria and the team of AI Hub engineers are constantly working to improve and update the system.
 
+- 🗣️ **A choice of 3 different TTS models including Ilaria TTS**:  
+You’re spoilt for choice with Ilaria RVC. You can choose from three different voice synthesis models, including Ilaria TTS.
 
-| OS        | Supported |
-|-----------|:---------:|
-| `Windows` |     ❌    |
-| `Ubuntu`  |     ✅    |
+- ✔️ **Ease of use for inexperienced users**:
+Don’t worry if you’re not a tech whiz. Ilaria RVC is designed to be easy to use for everyone, regardless of their level of experience.
+
+## 🙏 Credits 🙏
+
+- **Rejekt** - Original UI coder
+- **Kit Lemonfoot** - Implemented Ilaria TTS
+
+## 🤝 Contributing 🤝
+
+Interested in contributing to this project? We're always looking for collaborators.  
+Feel free to open a pull request on Hugging Face.
+
+## 📄 License 📄
+
+This project is released under the openrail license.  
+For more details, please contact Ilaria.
