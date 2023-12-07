@@ -11,16 +11,20 @@ license: openrail
 ---
 
 ***
-![Ilaria AI Suite](https://i.ibb.co/6yfRfS8/ilariasuitewallpaper.jpg)
+![Ilaria AI Suite](./ilariasuitewallpaper.jpg)
 ***
-
+![Static Badge](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Space-s?labelColor=YELLOW&color=FFEA00&link=https%3A%2F%2Fhuggingface.co%2Fspaces%2FTheStinger%2FIlaria_RVC) ![Static Badge](https://img.shields.io/badge/%F0%9F%A4%97%20HF%20Space-Duplication-s?labelColor=YELLOW&color=FFEA00&link=https%3A%2F%2Fhuggingface.co%2Fspaces%2FTheStinger%2FIlaria_RVC%3Fduplicate%3Dtrue) ![Static Badge](https://img.shields.io/badge/GitHub-Source%20Code-s?logo=GitHub&link=https%3A%2F%2Fgithub.com%2FTheStingerX%2FIlaria-RVC) ![Static Badge](https://img.shields.io/badge/AI%20Hub-Discord%20Server-s?logo=Discord&color=%09%237289da&link=https%3A%2F%2Fdiscord.gg%2Faihub)
+***
 <p align="center">
   <h1>Ilaria RVC 💖</h1>
 </p>
 
 🎉 Welcome to Ilaria RVC! 🎉  
   
-This project leverages various libraries and modules to create a Graphical User Interface (GUI) for voice conversion. It's primarily designed for use with HuggingFace Spaces. 🤗
+This project leverages various libraries and modules to create a Graphical User Interface (GUI) for voice conversion.  
+It's primarily designed for use with HuggingFace Spaces. 🤗   
+
+Ilaria RVC is part of the Ilaria AI Suite wich includes various easy and powerful tools. 💖
 
 ## 📦 Installation 📦
 
@@ -51,7 +55,7 @@ Ilaria RVC is a product in constant evolution. Ilaria and the team of AI Hub eng
 - 🗣️ **A choice of 3 different TTS models including Ilaria TTS**:  
 You’re spoilt for choice with Ilaria RVC. You can choose from three different voice synthesis models, including Ilaria TTS.
 
-- ✔️ **Ease of use for inexperienced users**:
+- ✔️ **Ease of use for inexperienced users**:  
 Don’t worry if you’re not a tech whiz. Ilaria RVC is designed to be easy to use for everyone, regardless of their level of experience.
 
 ## 🙏 Credits 🙏
@@ -66,5 +70,5 @@ Feel free to open a pull request on Hugging Face.
 
 ## 📄 License 📄
 
-This project is released under the openrail license.  
+This project is released under the `openrail` license.  
 For more details, please contact Ilaria.
