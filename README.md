@@ -48,7 +48,7 @@ Don’t worry if you’re not a tech whiz. Ilaria RVC is designed to be easy to 
 ## 🙏 Credits 🙏
 
 - **Rejekt** - Original UI coder
-- **Kit Lemonfoot** - Implemented Ilaria TTS
+- [**Kit Lemonfoot**](https://huggingface.co/Kit-Lemonfoot) - Implemented Ilaria TTS
 - [**GatienDoesStuff**](https://github.com/GatienDoesStuff) - For helping with the Gradio UI
 
 ## 🤝 Contributing 🤝
