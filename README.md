@@ -1,19 +1,6 @@
----
-title: Ilaria RVC
-emoji: 😻
-colorFrom: pink
-colorTo: pink
-sdk: gradio
-sdk_version: 3.42.0
-app_file: app.py
-pinned: true
-license: openrail
----
-
-***
 ![Ilaria AI Suite](./ilariasuitewallpaper.jpg)
 ***
-![Static Badge](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Space-s?labelColor=YELLOW&color=FFEA00&link=https%3A%2F%2Fhuggingface.co%2Fspaces%2FTheStinger%2FIlaria_RVC) ![Static Badge](https://img.shields.io/badge/%F0%9F%A4%97%20HF%20Space-Duplication-s?labelColor=YELLOW&color=FFEA00&link=https%3A%2F%2Fhuggingface.co%2Fspaces%2FTheStinger%2FIlaria_RVC%3Fduplicate%3Dtrue) ![Static Badge](https://img.shields.io/badge/GitHub-Source%20Code-s?logo=GitHub&link=https%3A%2F%2Fgithub.com%2FTheStingerX%2FIlaria-RVC) ![Static Badge](https://img.shields.io/badge/AI%20Hub-Discord%20Server-s?logo=Discord&color=%09%237289da&link=https%3A%2F%2Fdiscord.gg%2Faihub)
+[![Static Badge](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Space-s?labelColor=YELLOW&color=FFEA00)](https://huggingface.co/spaces/TheStinger/Ilaria_RVC) [![Static Badge](https://img.shields.io/badge/%F0%9F%A4%97%20HF%20Space-Duplication-s?labelColor=YELLOW&color=FFEA00)](https://huggingface.co/spaces/TheStinger/Ilaria_RVC?duplicate=true) [![Static Badge](https://img.shields.io/badge/GitHub-Source%20Code-s?logo=GitHub)](https://github.com/TheStingerX/Ilaria-RVC) [![Static Badge](https://img.shields.io/badge/AI%20Hub-Discord%20Server-s?logo=Discord&color=%09%237289da)](https://discord.gg/aihub)
 ***
 <p align="center">
   <h1>Ilaria RVC 💖</h1>
@@ -65,10 +52,11 @@ Don’t worry if you’re not a tech whiz. Ilaria RVC is designed to be easy to 
 
 ## 🤝 Contributing 🤝
 
-Interested in contributing to this project? We're always looking for collaborators.  
+Interested in contributing to this project? Ilaria is always looking for collaborators.  
 Feel free to open a pull request on Hugging Face.
 
 ## 📄 License 📄
 
-This project is released under the `openrail` license.  
-For more details, please contact Ilaria.
+This project is released under the `INCU` license.  
+For more details, please check the license file.  
+For further questions feel free to contact Ilaria.
