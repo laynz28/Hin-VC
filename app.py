@@ -2101,7 +2101,6 @@ with gr.Blocks(theme=gr.themes.Default(primary_hue="pink", secondary_hue="rose")
                         info3,
                     )
 
-        else:
             print(
                 "Pretrained weights not downloaded. Disabling training tab.\n"
                 "Wondering how to train a voice? Join AI HUB Discord Server! https://discord.gg/aihub\n"
