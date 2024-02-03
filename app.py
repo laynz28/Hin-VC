@@ -1870,8 +1870,7 @@ with gr.Blocks(theme=gr.themes.Default(primary_hue="pink", secondary_hue="rose")
             files_in_folder = os.listdir(pretrained_folder)
             num_files = len(files_in_folder)
             return num_files >= 2
-
-        if has_two_files_in_pretrained_folder():    
+   
             print("Pretrained weights are downloaded. Training tab enabled!\n-------------------------------")       
             with gr.TabItem("Train", visible=True):
                 with gr.Row():
