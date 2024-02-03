@@ -74,7 +74,7 @@ def download_models():
 
 download_models()
 
-print("\n-------------------------------\nRVC v2 Easy GUI (Local Edition)\n-------------------------------\n")
+print("\n-------------------------------\nIlaria RVC\n-------------------------------\n")
 
 def formant_apply(qfrency, tmbre):
     Quefrency = qfrency
@@ -1873,7 +1873,7 @@ with gr.Blocks(theme=gr.themes.Default(primary_hue="pink", secondary_hue="rose")
 
         if has_two_files_in_pretrained_folder():    
             print("Pretrained weights are downloaded. Training tab enabled!\n-------------------------------")       
-            with gr.TabItem("Train", visible=False):
+            with gr.TabItem("Train", visible=True):
                 with gr.Row():
                     with gr.Column():
                         exp_dir1 = gr.Textbox(label="Voice Name:", value="My-Voice")
