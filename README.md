@@ -51,6 +51,6 @@ Feel free to open a pull request on Hugging Face.
 
 ## 📄 License 📄
 
-This project is released under the `INCU` license.  
+This project is released under the `Mit` license.  
 For more details, please check the license file.  
 For further questions feel free to contact Ilaria.
