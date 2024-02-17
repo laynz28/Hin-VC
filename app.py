@@ -74,7 +74,7 @@ def download_models():
 
 download_models()
 
-print("\n-------------------------------\nIlaria RVC\n-------------------------------\n")
+print("\n-------------------------------\hin-VC\n-------------------------------\n")
 
 def formant_apply(qfrency, tmbre):
     Quefrency = qfrency
@@ -1481,12 +1481,12 @@ def zip_downloader(model):
     else:
         return f'./weights/{model}.pth', "Could not find Index file."
 
-with gr.Blocks(theme=gr.themes.Default(primary_hue="pink", secondary_hue="rose"), title="Ilaria RVC 💖") as app:
+with gr.Blocks(theme="Hev832/orange", secondary_hue="rose"), title="hin-VC") as app:
     with gr.Tabs():
         with gr.TabItem("Inference"):
-            gr.HTML("<h1>  Ilaria RVC 💖   </h1>")     
+            gr.HTML("<h1>  hin-VC   </h1>")     
             gr.HTML("<h10>   You can find voice models on AI Hub: https://discord.gg/aihub   </h10>")   
-            gr.HTML("<h4>  Huggingface port by Ilaria of the Rejekt Easy GUI </h4>")
+            gr.HTML("<h4>  original by Rejekts </h4>")
 
             # Inference Preset Row
             # with gr.Row():
@@ -1608,7 +1608,7 @@ with gr.Blocks(theme=gr.themes.Default(primary_hue="pink", secondary_hue="rose")
                     with gr.Accordion("Advanced Options", open=False):
                         f0method0 = gr.Radio(
                             label="Optional: Change the Pitch Extraction Algorithm. Extraction methods are sorted from 'worst quality' to 'best quality'. If you don't know what you're doing, leave rmvpe.",
-                            choices=["pm", "dio", "crepe-tiny", "mangio-crepe-tiny", "crepe", "harvest", "mangio-crepe", "rmvpe"], # Fork Feature. Add Crepe-Tiny
+                            choices=["pm", "dio", "crepe-tiny", "mangio-crepe-tiny", "crepe", "mangio-crepe", "rmvpe"], # Fork Feature. Add Crepe-Tiny
                             value="rmvpe",
                             interactive=True,
                         )
@@ -1729,124 +1729,7 @@ with gr.Blocks(theme=gr.themes.Default(primary_hue="pink", secondary_hue="rose")
                     [vc_output1, vc_output2],
                 )
                         
-            with gr.Accordion("Batch Conversion",open=False, visible=False):
-                with gr.Row():
-                    with gr.Column():
-                        vc_transform1 = gr.Number(
-                            label=i18n("变调(整数, 半音数量, 升八度12降八度-12)"), value=0
-                        )
-                        opt_input = gr.Textbox(label=i18n("指定输出文件夹"), value="opt")
-                        f0method1 = gr.Radio(
-                            label=i18n(
-                                "选择音高提取算法,输入歌声可用pm提速,harvest低音好但巨慢无比,crepe效果好但吃GPU"
-                            ),
-                            choices=["pm", "harvest", "crepe", "rmvpe"],
-                            value="rmvpe",
-                            interactive=True,
-                        )
-                        filter_radius1 = gr.Slider(
-                            minimum=0,
-                            maximum=7,
-                            label=i18n(">=3则使用对harvest音高识别的结果使用中值滤波，数值为滤波半径，使用可以削弱哑音"),
-                            value=3,
-                            step=1,
-                            interactive=True,
-                        )
-                    with gr.Column():
-                        file_index3 = gr.Textbox(
-                            label=i18n("特征检索库文件路径,为空则使用下拉的选择结果"),
-                            value="",
-                            interactive=True,
-                        )
-                        file_index4 = gr.Dropdown(
-                            label=i18n("自动检测index路径,下拉式选择(dropdown)"),
-                            choices=sorted(index_paths),
-                            interactive=True,
-                        )
-                        refresh_button.click(
-                            fn=lambda: change_choices()[1],
-                            inputs=[],
-                            outputs=file_index4,
-                        )
-                        # file_big_npy2 = gr.Textbox(
-                        #     label=i18n("特征文件路径"),
-                        #     value="E:\\codes\\py39\\vits_vc_gpu_train\\logs\\mi-test-1key\\total_fea.npy",
-                        #     interactive=True,
-                        # )
-                        index_rate2 = gr.Slider(
-                            minimum=0,
-                            maximum=1,
-                            label=i18n("检索特征占比"),
-                            value=1,
-                            interactive=True,
-                        )
-                    with gr.Column():
-                        resample_sr1 = gr.Slider(
-                            minimum=0,
-                            maximum=48000,
-                            label=i18n("后处理重采样至最终采样率，0为不进行重采样"),
-                            value=0,
-                            step=1,
-                            interactive=True,
-                        )
-                        rms_mix_rate1 = gr.Slider(
-                            minimum=0,
-                            maximum=1,
-                            label=i18n("输入源音量包络替换输出音量包络融合比例，越靠近1越使用输出包络"),
-                            value=1,
-                            interactive=True,
-                        )
-                        protect1 = gr.Slider(
-                            minimum=0,
-                            maximum=0.5,
-                            label=i18n(
-                                "保护清辅音和呼吸声，防止电音撕裂等artifact，拉满0.5不开启，调低加大保护力度但可能降低索引效果"
-                            ),
-                            value=0.33,
-                            step=0.01,
-                            interactive=True,
-                        )
-                    with gr.Column():
-                        dir_input = gr.Textbox(
-                            label=i18n("输入待处理音频文件夹路径(去文件管理器地址栏拷就行了)"),
-                            value="E:\codes\py39\\test-20230416b\\todo-songs",
-                        )
-                        inputs = gr.File(
-                            file_count="multiple", label=i18n("也可批量输入音频文件, 二选一, 优先读文件夹")
-                        )
-                    with gr.Row():
-                        format1 = gr.Radio(
-                            label=i18n("导出文件格式"),
-                            choices=["wav", "flac", "mp3", "m4a"],
-                            value="flac",
-                            interactive=True,
-                        )
-                        but1 = gr.Button(i18n("转换"), variant="primary")
-                        vc_output3 = gr.Textbox(label=i18n("输出信息"))
-                    but1.click(
-                        vc_multi,
-                        [
-                            spk_item,
-                            dir_input,
-                            opt_input,
-                            inputs,
-                            vc_transform1,
-                            f0method1,
-                            file_index3,
-                            file_index4,
-                            # file_big_npy2,
-                            index_rate2,
-                            filter_radius1,
-                            resample_sr1,
-                            rms_mix_rate1,
-                            protect1,
-                            format1,
-                            crepe_hop_length,
-                        ],
-                        [vc_output3],
-                    )
-                    but1.click(fn=lambda: easy_uploader.clear())
-        with gr.TabItem("Download Voice Models"):
+        with gr.TabItem("Download Models"):
             with gr.Row():
                 url=gr.Textbox(label="Huggingface Link:")
             with gr.Row():
@@ -1858,7 +1741,7 @@ with gr.Blocks(theme=gr.themes.Default(primary_hue="pink", secondary_hue="rose")
             with gr.Row():
                 gr.Markdown(
                 """
-                Made with 💖 by Ilaria | Support her on [Ko-Fi](https://ko-fi.com/ilariaowo)
+                Made with ❤ by Ilaria, Rejtks & Laynz28 
                 """
                 )
 
