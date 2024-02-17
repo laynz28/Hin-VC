@@ -1481,7 +1481,7 @@ def zip_downloader(model):
     else:
         return f'./weights/{model}.pth', "Could not find Index file."
 
-with gr.Blocks(theme="Hev832/orange", secondary_hue="rose"), title="hin-VC") as app:
+with gr.Blocks(theme="Hev832/orange"), title="hin-VC") as app:
     with gr.Tabs():
         with gr.TabItem("Inference"):
             gr.HTML("<h1>  hin-VC   </h1>")     
